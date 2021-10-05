@@ -1,5 +1,20 @@
-extends layout
+extends layout-vue
 
 block content
-  h1= title
-  p Welcome to #{title}
+  #app.my-3.container(v-cloak)
+    h1 伺服器啟動成功
+    hr
+    h2 Messaging API 設定
+    p 請把 Webhook 設定為 #[code {{ webhook }}]
+
+block script
+  script.
+    window.vm = new Vue({
+      el: '#app',
+      data: {
+        webhook: '',
+      },
+      async mounted () {
+        this.webhook = new URL('/webhook', location).href
+      },
+    })
