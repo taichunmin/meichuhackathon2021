@@ -11,15 +11,17 @@ const eventHandler = middlewareCompose([
   require('./echo-text'),
 ])
 
-router.post('/', middleware, async (req, res) => {
-  try {
-    const events = _.get(req, 'body.events', [])
-    await Promise.all(_.map(events, event => eventHandler({ event, req })))
-    res.json({})
-  } catch (err) {
-    debug(err)
-    res.status(err.status || 500).json({ message: err.message })
-  }
-})
+if (middleware) {
+  router.post('/', middleware, async (req, res) => {
+    try {
+      const events = _.get(req, 'body.events', [])
+      await Promise.all(_.map(events, event => eventHandler({ event, req })))
+      res.json({})
+    } catch (err) {
+      debug(err)
+      res.status(err.status || 500).json({ message: err.message })
+    }
+  })
+}
 
 module.exports = router
