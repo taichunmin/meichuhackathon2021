@@ -6,5 +6,9 @@ const config = {
   channelSecret: getenv('LINEOA_SECRET'),
 }
 
-exports.line = new line.Client(config)
-exports.middleware = line.middleware(config)
+try {
+  exports.line = new line.Client(config)
+  exports.middleware = line.middleware(config)
+} catch (err) {
+  console.log('請設定 LINEOA_ACCESS_TOKEN 與 LINEOA_SECRET')
+}
