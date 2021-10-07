@@ -1,11 +1,22 @@
 extends layout-vue
 
 block content
-  #app.my-3.container(v-cloak)
-    h1 伺服器啟動成功
-    hr
-    h2 Messaging API 設定
-    p 請把 Webhook 設定為 #[code {{ webhook }}]
+  #app.py-3(v-cloak)
+    .container.text-monospace
+      h1 伺服器啟動成功
+      hr
+      h2 Messaging API 設定
+      ol
+        li.mt-1: .d-flex.align-items-center 請把 #[code.mx-1 Webhook URL] 設定為 #[button.btn.btn-sm.btn-outline-primary.mx-1(@click="btnCopy(webhook)") {{ webhook }}]
+        li.mt-1: .d-flex.align-items-center 請把 #[button.btn.btn-sm.btn-outline-primary.mx-1(@click="btnCopy('LINEOA_ACCESS_TOKEN')") LINEOA_ACCESS_TOKEN] 設定為 #[code.mx-1 Channel access token (long-lived)]
+        li.mt-1: .d-flex.align-items-center 請把 #[button.btn.btn-sm.btn-outline-primary.mx-1(@click="btnCopy('LINEOA_SECRET')") LINEOA_SECRET] 設定為 #[code.mx-1 Channel secret]
+        li.mt-1: .d-flex.align-items-center 最後請按下「Restart Server」
+      hr
+      h2 LIFF 設定
+      ol
+        li.mt-1: .d-flex.align-items-center 請把 #[button.btn.btn-sm.btn-outline-primary.mx-1(@click="btnCopy('LIFFID_FULL')") LIFFID_FULL] 設定為 FULL 大小的 #[code.mx-1 LIFF ID]
+      hr
+      h3 以上步驟都完成後，請按「Restart Server」按鈕
 
 block script
   script.
@@ -16,5 +27,18 @@ block script
       },
       async mounted () {
         this.webhook = new URL('/webhook', location).href
+      },
+      methods: {
+        async btnCopy (text, container = null) {
+          if (!container) container = document.body
+          const dom = document.createElement('textarea')
+          dom.value = text
+          container.appendChild(dom)
+          dom.select()
+          dom.setSelectionRange(0, 1e6) // For mobile devices
+          document.execCommand('copy')
+          container.removeChild(dom)
+          await Swal.fire({ icon: 'success', title: '已複製到剪貼簿' })
+        },
       },
     })
