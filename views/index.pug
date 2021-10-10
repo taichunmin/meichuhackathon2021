@@ -1,5 +1,9 @@
 extends layout-vue
 
+block style
+  style.
+    .badge {vertical-align: text-top}
+
 block content
   #app.py-3(v-cloak)
     .container.text-monospace
@@ -7,25 +11,30 @@ block content
       hr
       h2 Messaging API 設定
       ol
-        li.mt-1: .d-flex.align-items-center 請把 #[code.mx-1 Webhook URL] 設定為 #[button.btn.btn-sm.btn-outline-primary.mx-1(@click="btnCopy(webhook)") {{ webhook }}]
-        li.mt-1: .d-flex.align-items-center 請把 #[button.btn.btn-sm.btn-outline-primary.mx-1(@click="btnCopy('LINEOA_ACCESS_TOKEN')") LINEOA_ACCESS_TOKEN] 設定為 #[code.mx-1 Channel access token (long-lived)]
-        li.mt-1: .d-flex.align-items-center 請把 #[button.btn.btn-sm.btn-outline-primary.mx-1(@click="btnCopy('LINEOA_SECRET')") LINEOA_SECRET] 設定為 #[code.mx-1 Channel secret]
-        li.mt-1: .d-flex.align-items-center 最後請按下「Restart Server」
+        li.mt-1 請把 #[code.mx-1 Webhook URL] 設定為 #[span.badge.badge-primary(@click="btnCopy(webhook)") {{ webhook }}]
+        li.mt-1 請把 #[span.badge.badge-primary(@click="btnCopy('LINEOA_ACCESS_TOKEN')") LINEOA_ACCESS_TOKEN] 設定為 #[code.mx-1 Channel access token (long-lived)]
+        li.mt-1 請把 #[span.badge.badge-primary(@click="btnCopy('LINEOA_SECRET')") LINEOA_SECRET] 設定為 #[code.mx-1 Channel secret]
       hr
       h2 LIFF 設定
       ol
-        li.mt-1: .d-flex.align-items-center 請把 #[button.btn.btn-sm.btn-outline-primary.mx-1(@click="btnCopy('LIFFID_FULL')") LIFFID_FULL] 設定為 FULL 大小的 #[code.mx-1 LIFF ID]
-      hr
-      h3 以上步驟都完成後，請按「Restart Server」按鈕
+        li.mt-1 新增一個 Full 大小的 LIFF，#[code Endpoint URL] 設定為 #[span.badge.badge-primary(@click="btnCopy(liffFull)") {{ liffFull }}]，然後把 #[span.badge.badge-primary(@click="btnCopy('LIFFID_FULL')") LIFFID_FULL] 設定為剛剛新增的 LIFF ID
+        li.mt-1 新增一個 Tall 大小的 LIFF，#[code Endpoint URL] 設定為 #[span.badge.badge-primary(@click="btnCopy(liffTall)") {{ liffTall }}]，然後把 #[span.badge.badge-primary(@click="btnCopy('LIFFID_TALL')") LIFFID_TALL] 設定為剛剛新增的 LIFF ID
+        li.mt-1 新增一個 Compact 大小的 LIFF，#[code Endpoint URL] 設定為 #[span.badge.badge-primary(@click="btnCopy(liffCompact)") {{ liffCompact }}]，然後把 #[span.badge.badge-primary(@click="btnCopy('LIFFID_COMPACT')") LIFFID_COMPACT] 設定為剛剛新增的 LIFF ID
 
 block script
   script.
     window.vm = new Vue({
       el: '#app',
       data: {
+        liffCompact: '',
+        liffFull: '',
+        liffTall: '',
         webhook: '',
       },
       async mounted () {
+        this.liffCompact = new URL('/liff/compact/', location).href
+        this.liffFull = new URL('/liff/full/', location).href
+        this.liffTall = new URL('/liff/tall/', location).href
         this.webhook = new URL('/webhook', location).href
       },
       methods: {
