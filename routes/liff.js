@@ -11,7 +11,7 @@ const LIFFID = {
 
 router.use("/", async (req, res, next) => {
   try {
-    const match = req.path.match(/\/(full|tall|compact)\/([A-Za-z0-9_-]*)/);
+    const match = req.path.match(/^\/(full|tall|compact)\/([A-Za-z0-9_-]*)$/);
     if (!match) throw createError(404);
 
     const [, size, filename] = match;
