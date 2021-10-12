@@ -11,15 +11,15 @@ block content
       hr
       h2 Messaging API 設定
       ol
-        li.mt-1 請把 #[code.mx-1 Webhook URL] 設定為 #[span.badge.badge-primary(@click="btnCopy(webhook)") {{ webhook }}]
+        li.mt-1 請把 #[code.mx-1 Webhook URL] 設定為 #[span.badge.badge-dark(@click="btnCopy(webhook)") {{ webhook }}]
         li.mt-1 請把 #[span.badge.badge-primary(@click="btnCopy('LINEOA_ACCESS_TOKEN')") LINEOA_ACCESS_TOKEN] 設定為 #[code.mx-1 Channel access token (long-lived)]
         li.mt-1 請把 #[span.badge.badge-primary(@click="btnCopy('LINEOA_SECRET')") LINEOA_SECRET] 設定為 #[code.mx-1 Channel secret]
       hr
       h2 LIFF 設定
       ol
-        li.mt-1 新增一個 Full 大小的 LIFF，#[code Endpoint URL] 設定為 #[span.badge.badge-primary(@click="btnCopy(liffFull)") {{ liffFull }}]，然後把 #[span.badge.badge-primary(@click="btnCopy('LIFFID_FULL')") LIFFID_FULL] 設定為剛剛新增的 LIFF ID
-        li.mt-1 新增一個 Tall 大小的 LIFF，#[code Endpoint URL] 設定為 #[span.badge.badge-primary(@click="btnCopy(liffTall)") {{ liffTall }}]，然後把 #[span.badge.badge-primary(@click="btnCopy('LIFFID_TALL')") LIFFID_TALL] 設定為剛剛新增的 LIFF ID
-        li.mt-1 新增一個 Compact 大小的 LIFF，#[code Endpoint URL] 設定為 #[span.badge.badge-primary(@click="btnCopy(liffCompact)") {{ liffCompact }}]，然後把 #[span.badge.badge-primary(@click="btnCopy('LIFFID_COMPACT')") LIFFID_COMPACT] 設定為剛剛新增的 LIFF ID
+        li.mt-1 新增一個 Full 大小的 LIFF，#[code Endpoint URL] 設定為 #[span.badge.badge-dark(@click="btnCopy(liffFull)") {{ liffFull }}]，然後把 #[span.badge.badge-primary(@click="btnCopy('LIFFID_FULL')") LIFFID_FULL] 設定為剛剛新增的 LIFF ID
+        li.mt-1 新增一個 Tall 大小的 LIFF，#[code Endpoint URL] 設定為 #[span.badge.badge-dark(@click="btnCopy(liffTall)") {{ liffTall }}]，然後把 #[span.badge.badge-primary(@click="btnCopy('LIFFID_TALL')") LIFFID_TALL] 設定為剛剛新增的 LIFF ID
+        li.mt-1 新增一個 Compact 大小的 LIFF，#[code Endpoint URL] 設定為 #[span.badge.badge-dark(@click="btnCopy(liffCompact)") {{ liffCompact }}]，然後把 #[span.badge.badge-primary(@click="btnCopy('LIFFID_COMPACT')") LIFFID_COMPACT] 設定為剛剛新增的 LIFF ID
 
 block script
   script.
